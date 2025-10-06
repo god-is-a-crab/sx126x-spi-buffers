@@ -1251,7 +1251,7 @@ pub enum PacketType {
 }
 impl PacketType {
     #[inline]
-    const fn from(value: u8) -> Self {
+    const fn from_bits(value: u8) -> Self {
         unsafe { core::mem::transmute(value & 0x03) }
     }
 }
@@ -1293,7 +1293,7 @@ impl GetPacketType {
     }
     #[inline]
     pub const fn packet_type(&self) -> PacketType {
-        PacketType::from(self.rx_buf[2])
+        PacketType::from_bits(self.rx_buf[2])
     }
 }
 
